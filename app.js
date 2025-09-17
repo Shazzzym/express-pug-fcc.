@@ -1,19 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3000;
 
-// Set Pug as the template engine
-app.set('view engine', 'pug');
+app.use(cors());
 
-// Set the views directory
-app.set('views', './views/pug');
-
-// Home route that renders the Pug template
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Start the server
+// Set methods AFTER the route (as suggested in forum)
+app.set('view engine', 'pug');
+app.set('views', './views/pug');
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
